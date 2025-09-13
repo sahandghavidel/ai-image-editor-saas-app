@@ -331,7 +331,7 @@ export default function HomePage() {
               >
                 <CardContent className="p-6">
                   <div className="mb-4 flex items-center gap-1">
-                    {[...Array(testimonial.rating)].map((_, i) => (
+                    {Array.from({ length: Number(testimonial.rating) }).map((_, i) => (
                       <Star
                         key={i}
                         className="h-4 w-4 fill-amber-400 text-amber-400"

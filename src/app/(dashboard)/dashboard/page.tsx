@@ -47,7 +47,7 @@ export default function DashboardPage() {
     thisMonth: 0,
     thisWeek: 0,
   });
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ name?: string; createdAt?: string | Date } | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export default function DashboardPage() {
               Welcome back{user?.name ? `, ${user.name}` : ""}!
             </h1>
             <p className="text-muted-foreground text-base sm:text-lg">
-              Here's an overview of your AI image editing workspace
+              Here&apos;s an overview of your AI image editing workspace
             </p>
           </div>
 
@@ -175,7 +175,7 @@ export default function DashboardPage() {
               <CardContent>
                 <div className="text-2xl font-bold text-yellow-600">
                   {user?.createdAt
-                    ? new Date(user.createdAt).toLocaleDateString("en-US", {
+                    ? new Date(user.createdAt as string | number | Date).toLocaleDateString("en-US", {
                         month: "short",
                         year: "numeric",
                       })
@@ -292,7 +292,7 @@ export default function DashboardPage() {
                         <ImageKitImage
                           urlEndpoint={env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
                           src={project.filePath}
-                          alt={project.name || "Project"}
+                          alt={project.name ?? "Project"}
                           width={200}
                           height={200}
                           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
@@ -308,7 +308,7 @@ export default function DashboardPage() {
                       </div>
                       <div className="p-3">
                         <h4 className="truncate text-sm font-medium">
-                          {project.name || "Untitled Project"}
+                          {project.name ?? "Untitled Project"}
                         </h4>
                         <p className="text-muted-foreground text-xs">
                           {new Date(project.createdAt).toLocaleDateString()}
