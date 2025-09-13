@@ -52,6 +52,13 @@ interface Transformation {
   raw?: string;
 }
 
+interface UploadAuthResponse {
+  signature: string;
+  expire: number;
+  token: string;
+  publicKey: string;
+}
+
 export default function CreatePage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
@@ -87,10 +94,10 @@ export default function CreatePage() {
     void initializeData();
   }, []);
 
-  const getUploadAuth = async (): Promise<Record<string, unknown>> => {
+  const getUploadAuth = async (): Promise<UploadAuthResponse> => {
     const response = await fetch("/api/upload-auth");
     if (!response.ok) throw new Error("Auth failed");
-    return response.json() as Promise<Record<string, unknown>>;
+    return response.json() as Promise<UploadAuthResponse>;
   };
 
   const selectFile = () => {
@@ -108,7 +115,7 @@ export default function CreatePage() {
 
     setIsUploading(true);
     try {
-      const authParams = (await getUploadAuth()) as any;
+      const authParams = await getUploadAuth();
       const result = await upload({
         file,
         fileName: file.name,
@@ -323,7 +330,7 @@ export default function CreatePage() {
     // Get the actual rendered image URL from the main preview
     const mainImage = document.querySelector(
       'img[width="800"][height="600"]',
-    ) as HTMLImageElement;
+    ) as HTMLImageElement | null;
     const url =
       mainImage?.src ??
       `${env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}${uploadedImage.filePath}`;
