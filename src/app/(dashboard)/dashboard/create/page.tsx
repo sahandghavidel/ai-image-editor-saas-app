@@ -78,13 +78,13 @@ export default function CreatePage() {
       }
     };
 
-    initializeData();
+    void initializeData();
   }, []);
 
-  const getUploadAuth = async () => {
+  const getUploadAuth = async (): Promise<Record<string, unknown>> => {
     const response = await fetch("/api/upload-auth");
     if (!response.ok) throw new Error("Auth failed");
-    return response.json();
+    return response.json() as Promise<Record<string, unknown>>;
   };
 
   const selectFile = () => {
@@ -98,11 +98,11 @@ export default function CreatePage() {
 
   const uploadFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (!file || !file.type.startsWith("image/")) return;
+    if (!file?.type.startsWith("image/")) return;
 
     setIsUploading(true);
     try {
-      const authParams = await getUploadAuth();
+      const authParams = (await getUploadAuth()) as any;
       const result = await upload({
         file,
         fileName: file.name,
@@ -111,10 +111,10 @@ export default function CreatePage() {
       });
 
       const uploadedData = {
-        fileId: result.fileId || "",
-        url: result.url || "",
-        name: result.name || file.name,
-        filePath: result.filePath || "",
+        fileId: result.fileId ?? "",
+        url: result.url ?? "",
+        name: result.name ?? file.name,
+        filePath: result.filePath ?? "",
       };
 
       setUploadedImage(uploadedData);
