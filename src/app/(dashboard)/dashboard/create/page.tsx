@@ -46,6 +46,12 @@ interface Project {
   updatedAt: Date;
 }
 
+interface Transformation {
+  aiRemoveBackground?: true;
+  aiUpscale?: true;
+  raw?: string;
+}
+
 export default function CreatePage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
@@ -53,7 +59,7 @@ export default function CreatePage() {
   const [uploadedImage, setUploadedImage] = useState<UploadedImage | null>(
     null,
   );
-  const [transformations, setTransformations] = useState<object[]>([]);
+  const [transformations, setTransformations] = useState<Transformation[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [userProjects, setUserProjects] = useState<Project[]>([]);
   const [isLoadingProjects, setIsLoadingProjects] = useState(true);
@@ -160,7 +166,7 @@ export default function CreatePage() {
 
   // Helper functions to check if transformations exist
   const hasTransformation = (type: string) => {
-    return transformations.some((transform: any) => {
+    return transformations.some((transform: Transformation) => {
       if (type === "background" && transform.aiRemoveBackground) return true;
       if (type === "upscale" && transform.aiUpscale) return true;
       if (
@@ -176,7 +182,7 @@ export default function CreatePage() {
   // Function to remove specific transformation
   const removeTransformation = (type: string) => {
     setTransformations((prev) =>
-      prev.filter((transform: any) => {
+      prev.filter((transform: Transformation) => {
         if (type === "background" && transform.aiRemoveBackground) return false;
         if (type === "upscale" && transform.aiUpscale) return false;
         if (
@@ -209,7 +215,7 @@ export default function CreatePage() {
       const creditResult = await deductCredits(2, "background removal");
 
       if (!creditResult.success) {
-        toast.error(creditResult.error || "Failed to process payment");
+        toast.error(creditResult.error ?? "Failed to process payment");
         setIsProcessing(false);
         return;
       }
@@ -248,7 +254,7 @@ export default function CreatePage() {
       const creditResult = await deductCredits(1, "upscaling");
 
       if (!creditResult.success) {
-        toast.error(creditResult.error || "Failed to process payment");
+        toast.error(creditResult.error ?? "Failed to process payment");
         setIsProcessing(false);
         return;
       }
@@ -319,7 +325,7 @@ export default function CreatePage() {
       'img[width="800"][height="600"]',
     ) as HTMLImageElement;
     const url =
-      mainImage?.src ||
+      mainImage?.src ??
       `${env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}${uploadedImage.filePath}`;
 
     window.open(url, "_blank");
@@ -771,7 +777,7 @@ export default function CreatePage() {
           ) : userProjects.length > 0 ? (
             <div className="mb-12">
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-                {userProjects.slice(0, 12).map((project, index) => (
+                {userProjects.slice(0, 12).map((project, _index) => (
                   <div
                     key={project.id}
                     className="group relative cursor-pointer"
@@ -779,7 +785,7 @@ export default function CreatePage() {
                       setUploadedImage({
                         fileId: project.imageKitId,
                         url: project.imageUrl,
-                        name: project.name || "Untitled",
+                        name: project.name ?? "Untitled",
                         filePath: project.filePath,
                       });
                       setTransformations([]);
@@ -794,7 +800,7 @@ export default function CreatePage() {
                         <ImageKitImage
                           urlEndpoint={env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
                           src={project.filePath}
-                          alt={project.name || "Project"}
+                          alt={project.name ?? "Project"}
                           width={300}
                           height={300}
                           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -816,7 +822,7 @@ export default function CreatePage() {
                       <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 transform bg-gradient-to-t from-black/80 via-black/50 to-transparent p-4 transition-transform duration-300 group-hover:translate-y-0">
                         <div className="space-y-1">
                           <h3 className="truncate text-sm font-bold text-white drop-shadow-lg">
-                            {project.name || "Untitled Project"}
+                            {project.name ?? "Untitled Project"}
                           </h3>
                           <div className="flex items-center justify-between">
                             <p className="text-xs text-white/90 drop-shadow-md">
