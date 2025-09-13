@@ -15,6 +15,7 @@ import SidebarMenuItems from "./sidebar-menu-items";
 import { User, Sparkles, Settings } from "lucide-react";
 import Upgrade from "./upgrade";
 import MobileSidebarClose from "./mobile-sidebar-close";
+import Link from "next/link";
 
 export async function AppSidebar() {
   return (
@@ -23,12 +24,12 @@ export async function AppSidebar() {
         <MobileSidebarClose />
         <SidebarGroup>
           <SidebarGroupLabel className="text-primary mt-6 mb-8 flex flex-col items-start justify-start px-2">
-            <div className="mb-1 flex items-center gap-2">
+            <Link href="/" className="mb-1 flex items-center gap-2">
               <Sparkles className="text-primary h-6 w-6" />
               <p className="from-primary to-primary/70 bg-gradient-to-r bg-clip-text text-2xl font-bold tracking-tight text-transparent">
                 AI Image
               </p>
-            </div>
+            </Link>
             <p className="text-muted-foreground ml-8 text-sm font-medium tracking-wide">
               Editor
             </p>
