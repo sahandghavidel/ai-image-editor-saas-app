@@ -328,11 +328,9 @@ export default function CreatePage() {
     if (!uploadedImage) return;
 
     // Get the actual rendered image URL from the main preview
-    const mainImage = document.querySelector(
-      'img[width="800"][height="600"]',
-    ) as HTMLImageElement | null;
+    const mainImage = document.querySelector('img[width="800"][height="600"]');
     const url =
-      mainImage?.src ??
+      (mainImage as HTMLImageElement)?.src ??
       `${env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}${uploadedImage.filePath}`;
 
     window.open(url, "_blank");
