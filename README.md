@@ -1,29 +1,115 @@
-# Create T3 App
+# 🚀 AI Image Editor SaaS with Next.js 15, Neon, Polar, Better Auth & ImageKit
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Welcome to the ultimate AI Image Editor SaaS application! This project demonstrates how to build a fully featured, production-ready SaaS platform using the latest technologies — Next.js 15, Neon (PostgreSQL), Polar payments, Better Auth authentication, and ImageKit for AI-powered image editing — all deployed on Vercel, completely free to get started.
 
-## What's next? How do I make an app with this?
+## 🔗 Useful Links
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Neon** → https://get.neon.com/BzsDb4L
+- **ImageKit** → https://tinyurl.com/yc4uz5t6
+- **Polar** → https://polar.sh
+- **Better Auth** → https://better-auth.com
+- **Eraser Diagram** → https://app.eraser.io/workspace/WQa2bvFxwX5kaoqG3KfN?origin=share
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## ✅ Key Features
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- **🔐 Secure Authentication**: Email, password & social logins with Better Auth
+- **💳 Payments & Credits**: Integrated payment system with Polar
+- **🤖 AI-Powered Editing**: Background removal, upscaling & smart cropping
+- **📁 Project Management**: Save and manage image editing history
+- **👤 Customer Portal**: Invoices, billing info & credit pack management
+- **📱 Responsive Design**: Modern UI that works on all devices
+- **⚡ Real-time Updates**: Live credit deduction and status updates
+- **🎨 Professional Layout**: Smooth transitions and polished SaaS interface
+- **☁️ Serverless Deployment**: Scalable hosting on Vercel
 
-## Learn More
+## 🧠 Built With
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **Frontend**: Next.js 15 (App Router + Server Actions)
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **Database**: Neon PostgreSQL + Prisma ORM
+- **Payments**: Polar payment platform
+- **Authentication**: Better Auth
+- **Image Processing**: ImageKit (storage, optimization & AI features)
+- **Deployment**: Vercel (free tier available)
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## 🚀 Getting Started
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+1. **Clone the repository**
 
-## How do I deploy this?
+   ```bash
+   git clone https://github.com/sahandghavidel/ai-image-editor-saas-app.git
+   cd ai-image-editor-saas-app
+   ```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Fill in your environment variables for Neon, ImageKit, Polar, and Better Auth.
+
+4. **Set up the database**
+
+   ```bash
+   npx prisma migrate dev
+   ```
+
+5. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+6. **Open your browser**
+   Navigate to `http://localhost:3000`
+
+## 📖 What You'll Learn
+
+This project is perfect for developers who want to learn:
+
+- **Modern Full-Stack Development** with Next.js 15
+- **SaaS Application Architecture** and best practices
+- **AI Image Processing Integration** with ImageKit
+- **Payment Systems Implementation** using Polar
+- **Advanced Authentication** with Better Auth
+- **Database Design and Management** with Prisma
+- **Serverless Deployment** strategies
+
+## 🎯 Perfect For
+
+- Full-stack developers looking to build SaaS applications
+- Next.js enthusiasts wanting to explore the latest features
+- Developers interested in AI integration
+- Anyone learning modern web development practices
+
+## 📊 Project Architecture
+
+Check out our detailed system architecture diagram on [Eraser](https://app.eraser.io/workspace/WQa2bvFxwX5kaoqG3KfN?origin=share).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- ImageKit for providing powerful image processing APIs
+- Neon for the amazing PostgreSQL hosting platform
+- Polar for the seamless payment integration
+- Better Auth for the robust authentication system
+
+---
+
+If you found this project helpful, please give it a ⭐ on GitHub and consider following for more amazing projects!
+
+**#nextjs #ai #saas #fullstackdevelopment #imagekit**
